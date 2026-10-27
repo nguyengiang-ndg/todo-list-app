@@ -1,17 +1,25 @@
-# Danh sách để lưu các công việc (mỗi phần tử là 1 dictionary)
+# Danh sách để lưu các công việc
 tasks = []
 
 def add_task(task_name):
-    """Thêm một công việc mới vào danh sách dạng dictionary."""
+    """Thêm một công việc mới vào danh sách."""
     task = {'name': task_name, 'completed': False}
     tasks.append(task)
     print(f"Đã thêm công việc: '{task_name}'")
 
 def complete_task(task_index):
-    """Đánh dấu một công việc là đã hoàn thành theo chỉ số (0-based index)."""
+    """Đánh dấu một công việc là đã hoàn thành."""
     if 0 <= task_index < len(tasks):
         tasks[task_index]['completed'] = True
         print(f"Đã hoàn thành công việc: '{tasks[task_index]['name']}'")
+    else:
+        print("Chỉ số công việc không hợp lệ!")
+
+def delete_task(task_index):
+    """Xóa một công việc khỏi danh sách dựa trên chỉ số."""
+    if 0 <= task_index < len(tasks):
+        removed_task = tasks.pop(task_index)
+        print(f"Đã xóa công việc: '{removed_task['name']}'")
     else:
         print("Chỉ số công việc không hợp lệ!")
 
@@ -31,12 +39,14 @@ if __name__ == "__main__":
     print("Chào mừng đến với ứng dụng To-Do List!")
     add_task("Học bài Git và GitHub")
     add_task("Làm bài tập thực hành ở nhà")
+    add_task("Nộp bài tập cho thầy")
     
-    print("\n--- Danh sách công việc ban đầu ---")
     list_tasks()
     
-    # Đánh dấu hoàn thành công việc đầu tiên (chỉ số 0)
+    print("\n--- Thực hiện đánh dấu hoàn thành ---")
     complete_task(0)
+    list_tasks()
     
-    print("\n--- Danh sách công việc sau khi hoàn thành ---")
+    print("\n--- Thực hiện xóa công việc ---")
+    delete_task(1)  # Xóa công việc "Làm bài tập thực hành ở nhà"
     list_tasks()
